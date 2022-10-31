@@ -1,66 +1,14 @@
 # ayakurume
-- full rootfs r/w (fakefs), tweak injection etc...
+
+# 別手順
+パッチ済kernelcacheをpreboot内に配置して、iBSS/iBootを送信して起動する方法もあります。  
 
 
-## 注意
-間違いがある可能性大、serialでデバッグ推奨(デバイス側のverbose bootだとSpringBoardが起動すると追えなくなるため)
-
-## サポート環境
-- iPhone 6s (iPhone8,1/N71AP) 15.7.1
-
-# 使うもの
-- [gaster](https://github.com/0x7ff/gaster)
-- [libirecovery](https://github.com/libimobiledevice/libirecovery)
-- [SSHRD_Script](https://github.com/verygenericname/SSHRD_Script)
-- [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)
-
-- [bootstrap-ssh.tar](https://cdn.discordapp.com/attachments/1017153024768081921/1026161261077090365/bootstrap-ssh.tar)
-- [org.swift.libswift_5.0-electra2_iphoneos-arm.deb](https://github.com/coolstar/Odyssey-bootstrap/raw/master/org.swift.libswift_5.0-electra2_iphoneos-arm.deb)
-- [com.ex.substitute_2.3.1_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.3.1_iphoneos-arm.deb)
-- [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)
-
-# 手順
-## sshrdで必要なものをセットアップ
-- macos side
-```
-cd SSHRD_Script/
-./sshrd.sh 15.7.1
-./sshrd.sh boot
-./sshrd.sh ssh
-```
-- ios side
-```
-newfs_apfs -A -D -o role=r -v System /dev/disk0s1
-mount_apfs /dev/disk0s1s1 /mnt1
-mount_apfs /dev/disk0s1s8 /mnt2
-mount_apfs /dev/disk0s1s6 /mnt6
-cp -a /mnt1/. /mnt2/
-umount /mnt1
-mkdir /mnt6/{UUID}/binpack
-mkdir /mnt2/jbin
-```
-- macos side
-```
-scp -P 2222 lightstrap.tar root@localhost:/mnt6/
-scp -P 2222 jb.dylib jbloader launchd root@localhost:/mnt2/jbin/
-```
-- ios side
-```
-tar -xvf /mnt6/lightstrap.tar -C /mnt6/{UUID}/binpack/
-rm /mnt6/lightstrap.tar
-```
-
-sshpassなどを使い、`/mnt6/{UUID}/System/Library/Caches/apticket.der`(以下`apticket.der`として使用)をmac側にコピーする
-
+## [追加手順] sshrdで必要なものをセットアップ
 - macos side
 ```
 ./img4 -i kernelcache.release.n71 -o kernelcachd -P kc.bpatch -M apticket.der
 scp -P {port} kernelcachd root@localhost:/mnt6/{UUID}/System/Library/Caches/com.apple.kernelcaches/kernelcachd
-```
-
-- ios side
-```
-reboot
 ```
 
 ## 初回起動前準備
@@ -74,7 +22,7 @@ bspatch iBoot.n71.RELEASE.dec pwniBoot.dec iBoot.n71.RELEASE.patch
 ./img4 -i pwniBSS.dec -o iBSS.img4 -M apticket.der -A -T ibss
 ./img4 -i pwniBoot.dec -o iBoot.img4 -M apticket.der -A -T ibec
 ```
-*iBootのboot-argsは`rd=disk0s1s8 serial=3`に設定されています。(必要に応じて改変ok)
+*iBootのboot-argsは`rd=disk0s1s8 serial=3`に設定されています。(`rd=disk0s1s8`は必須、それ以外は必要に応じて改変ok)
 
 ## 初回起動
 - macos side
@@ -120,10 +68,3 @@ reboot
 irecovery -f iBSS.img4
 irecovery -f iBoot.img4
 ```
-
-# credit
-- launchd hook: [LinusHenze's fugu](https://github.com/LinusHenze/Fugu)
-- jbinit: [tihmstar](https://github.com/tihmstar/jbinit)
-- img4lib: [xerub](https://github.com/xerub/img4lib)
-- bootstrap: [ProcursusTeam](https://github.com/ProcursusTeam)
-- bootstrap: [checkra1n](https://github.com/checkra1n)
