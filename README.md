@@ -1,25 +1,27 @@
-# ayakurume
-iOS 15 jailbreak for checkm8 devices  
+# ayakurume  
+WIP developer only iOS 15 jailbreak for checkm8 devices (Apple A8-A11)  
 full rootfs r/w (fakefs), tweak injection etc...  
 
-## 注意
+## 注意  
 間違いがある可能性大、serialでデバッグ推奨(デバイス側のverbose bootだとSpringBoardが起動すると追えなくなるため)  
 
-## サポート環境
+## サポート環境  
 - iPhone 6s (iPhone8,1/N71AP) 15.7.1  
+デバイスの容量が32GB以上必要です。rootfsを複製するため、容量を5GBほどロスします。  
 
-# 使うもの
-- [gaster](https://github.com/0x7ff/gaster)
-- [libirecovery](https://github.com/libimobiledevice/libirecovery)
-- [SSHRD_Script](https://github.com/verygenericname/SSHRD_Script)
-- [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)
+# 使うもの  
+- iPhone8,1 iOS 15.7.1のipsw  
+- [gaster](https://github.com/0x7ff/gaster)  
+- [libirecovery](https://github.com/libimobiledevice/libirecovery)  
+- [SSHRD_Script](https://github.com/verygenericname/SSHRD_Script)  
+- [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)  
 
-- [bootstrap-ssh.tar](https://cdn.discordapp.com/attachments/1017153024768081921/1026161261077090365/bootstrap-ssh.tar)
-- [org.swift.libswift_5.0-electra2_iphoneos-arm.deb](https://github.com/coolstar/Odyssey-bootstrap/raw/master/org.swift.libswift_5.0-electra2_iphoneos-arm.deb)
-- [com.ex.substitute_2.3.1_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.3.1_iphoneos-arm.deb)
-- [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)
+- [bootstrap-ssh.tar](https://cdn.discordapp.com/attachments/1017153024768081921/1026161261077090365/bootstrap-ssh.tar)  
+- [org.swift.libswift_5.0-electra2_iphoneos-arm.deb](https://github.com/coolstar/Odyssey-bootstrap/raw/master/org.swift.libswift_5.0-electra2_iphoneos-arm.deb)  
+- [com.ex.substitute_2.3.1_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.3.1_iphoneos-arm.deb)  
+- [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)  
 
-# 手順
+# 手順  
 ## sshrdで必要なものをセットアップ  
 - macos side
 ```
@@ -41,8 +43,9 @@ mkdir /mnt2/jbin
 ```
 - macos side
 ```
-scp -P 2222 lightstrap.tar root@localhost:/mnt6/
-scp -P 2222 jb.dylib jbloader launchd root@localhost:/mnt2/jbin/
+cd ayakurume/
+scp -P 2222 ios/lightstrap.tar root@localhost:/mnt6/
+scp -P 2222 ios/jb.dylib ios/jbloader ios/launchd root@localhost:/mnt2/jbin/
 ```
 - ios side
 ```
