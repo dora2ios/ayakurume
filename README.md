@@ -2,15 +2,15 @@
 WIP developer only iOS 15 jailbreak for checkm8 devices (Apple A8-A11)  
 full rootfs r/w (fakefs), tweak injection etc...  
 
-## 注意  
-間違いがある可能性大、serialでデバッグ推奨(デバイス側のverbose bootだとSpringBoardが起動すると追えなくなるため)  
+## Attention
+It's very likely that there are mistakes in the code, so it's recommended to debug in serial (because the device-side verbose boot is not able to follow SpringBoard's startup).
 
-## サポート環境  
+## Supported Environment 
 - iPhone 6s (iPhone8,1/N71AP) 15.7.1  
-デバイスの容量が32GB以上必要です。rootfsを複製するため、容量を5GBほどロスします。  
+It is necessary that your device's storage is 32 GB or more. When duplicating rootfs, 5GB of storage will be used up.
 
-# 使うもの  
-- iPhone8,1 iOS 15.7.1のipsw  
+# Dependencies 
+- iPhone8,1 ipsw of iOS 15.7.1
 - [gaster](https://github.com/0x7ff/gaster)  
 - [libirecovery](https://github.com/libimobiledevice/libirecovery)  
 - [SSHRD_Script](https://github.com/verygenericname/SSHRD_Script)  
@@ -21,8 +21,8 @@ full rootfs r/w (fakefs), tweak injection etc...
 - [com.ex.substitute_2.3.1_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.3.1_iphoneos-arm.deb)  
 - [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)  
 
-# 手順  
-## sshrdで必要なものをセットアップ  
+# Procedure
+## setting up the necessary components to sshrd 
 - macos side
 ```
 cd SSHRD_Script/
@@ -53,7 +53,7 @@ tar -xvf /mnt6/lightstrap.tar -C /mnt6/{UUID}/binpack/
 rm /mnt6/lightstrap.tar
 ```
 
-sshpassなどを使い、`/mnt6/{UUID}/System/Library/Caches/apticket.der`(以下`apticket.der`として使用)をmac側にコピーする
+Using something like sshpass, copy`/mnt6/{UUID}/System/Library/Caches/apticket.der`(now used as`apticket.der) to the mac side.
 
 
 - ios side
@@ -61,7 +61,7 @@ sshpassなどを使い、`/mnt6/{UUID}/System/Library/Caches/apticket.der`(以�
 reboot
 ```
 
-## 初回起動前準備  
+## First-run preparations
 - macos side
 ```
 ./gaster pwn
@@ -70,14 +70,14 @@ bspatch iBSS.n71.RELEASE.dec pwniBSS.dec n71_19H117/jboot/iBSS.patch
 ./img4 -i pwniBSS.dec -o iBSS.img4 -M apticket.der -A -T ibss
 ```
 
-## 初回起動  
+## First run
 - macos side
 ```
 ./gaster pwn
 irecovery -f iBSS.img4
 ```
 
-dropbearの起動を確認後
+After confirming the startup of dropbear
 - macos side
 ```
 iproxy {port} 44
@@ -106,7 +106,7 @@ touch /.installed_ayakurume
 reboot
 ```
 
-## 起動  
+## Running
 - macos side
 ```
 ./gaster pwn
@@ -119,3 +119,4 @@ irecovery -f iBSS.img4
 - img4lib: [xerub](https://github.com/xerub/img4lib)  
 - bootstrap: [ProcursusTeam](https://github.com/ProcursusTeam)  
 - bootstrap: [checkra1n](https://github.com/checkra1n)  
+- translation: [lisianthus](https://github.com/lisiyaki)
