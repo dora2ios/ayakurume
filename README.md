@@ -77,10 +77,7 @@ bspatch iBSS.n71.RELEASE.dec pwniBSS.dec n71_19H117/jboot/iBSS.patch
 irecovery -f iBSS.img4
 ```
 
-dropbearの起動をdropbearの起動を確認後
-
-
-
+After confirming the startup of dropbear
 - macos side
 ```
 iproxy {port} 44
@@ -109,7 +106,7 @@ touch /.installed_ayakurume
 reboot
 ```
 
-## 起動  
+## Running
 - macos side
 ```
 ./gaster pwn
@@ -122,3 +119,4 @@ irecovery -f iBSS.img4
 - img4lib: [xerub](https://github.com/xerub/img4lib)  
 - bootstrap: [ProcursusTeam](https://github.com/ProcursusTeam)  
 - bootstrap: [checkra1n](https://github.com/checkra1n)  
+- translation: [lisianthus](https://github.com/lisiyaki)
