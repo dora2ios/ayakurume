@@ -5,11 +5,11 @@ full rootfs r/w (fakefs), tweak injection etc...
 ## Attention
 It's veey likely that there are mistakes in the code, it's recommended to debug in serial (because the device-side verbose boot is not able to follow SpringBoard's startup)
 
-## Support Environment 
+## Supported Environment 
 - iPhone 6s (iPhone8,1/N71AP) 15.7.1  
 It is necessary that your device's storage is 32 GB or more. When duplicating rootfs, 5GB of storage will be used up.
 
-# What I used to make this 
+# Dependencies 
 - iPhone8,1 iOS 15.7.1のipsw  
 - [gaster](https://github.com/0x7ff/gaster)  
 - [libirecovery](https://github.com/libimobiledevice/libirecovery)  
@@ -22,7 +22,7 @@ It is necessary that your device's storage is 32 GB or more. When duplicating ro
 - [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)  
 
 # Procedure
-## sshrdで必要なものをセットアップ  
+## setting up the necessary components to sshrd 
 - macos side
 ```
 cd SSHRD_Script/
@@ -53,7 +53,7 @@ tar -xvf /mnt6/lightstrap.tar -C /mnt6/{UUID}/binpack/
 rm /mnt6/lightstrap.tar
 ```
 
-sshpassなどを使い、`/mnt6/{UUID}/System/Library/Caches/apticket.der`(以下`apticket.der`として使用)をmac側にコピーする
+Using something like sshpass, copy`/mnt6/{UUID}/System/Library/Caches/apticket.der`(now used as`apticket.der) to the mac side.
 
 
 - ios side
@@ -61,7 +61,7 @@ sshpassなどを使い、`/mnt6/{UUID}/System/Library/Caches/apticket.der`(以�
 reboot
 ```
 
-## 初回起動前準備  
+## First-run preparations
 - macos side
 ```
 ./gaster pwn
@@ -70,14 +70,17 @@ bspatch iBSS.n71.RELEASE.dec pwniBSS.dec n71_19H117/jboot/iBSS.patch
 ./img4 -i pwniBSS.dec -o iBSS.img4 -M apticket.der -A -T ibss
 ```
 
-## 初回起動  
+## First run
 - macos side
 ```
 ./gaster pwn
 irecovery -f iBSS.img4
 ```
 
-dropbearの起動を確認後
+dropbearの起動をdropbearの起動を確認後
+
+
+
 - macos side
 ```
 iproxy {port} 44
