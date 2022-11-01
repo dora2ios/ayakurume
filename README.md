@@ -2,14 +2,14 @@
 WIP developer only iOS 15 jailbreak for checkm8 devices (Apple A8-A11)  
 full rootfs r/w (fakefs), tweak injection etc...  
 
-## 注意  
-間違いがある可能性大、serialでデバッグ推奨(デバイス側のverbose bootだとSpringBoardが起動すると追えなくなるため)  
+## Attention
+It's veey likely that there are mistakes in the code, it's recommended to debug in serial (because the device-side verbose boot is not able to follow SpringBoard's startup)
 
-## サポート環境  
+## Support Environment 
 - iPhone 6s (iPhone8,1/N71AP) 15.7.1  
-デバイスの容量が32GB以上必要です。rootfsを複製するため、容量を5GBほどロスします。  
+It is necessary that your device's storage is 32 GB or more. When duplicating rootfs, 5GB of storage will be used up.
 
-# 使うもの  
+# What I used to make this 
 - iPhone8,1 iOS 15.7.1のipsw  
 - [gaster](https://github.com/0x7ff/gaster)  
 - [libirecovery](https://github.com/libimobiledevice/libirecovery)  
@@ -21,7 +21,7 @@ full rootfs r/w (fakefs), tweak injection etc...
 - [com.ex.substitute_2.3.1_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.ex.substitute_2.3.1_iphoneos-arm.deb)  
 - [com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb](https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6005_iphoneos-arm.deb)  
 
-# 手順  
+# Procedure
 ## sshrdで必要なものをセットアップ  
 - macos side
 ```
