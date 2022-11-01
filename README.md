@@ -10,7 +10,7 @@ It's very likely that there are mistakes in the code, so it's recommended to deb
 It is necessary that your device's storage is 32 GB or more. When duplicating rootfs, 5GB of storage will be used up.
 
 # Dependencies 
-- iPhone8,1 iOS 15.7.1のipsw  
+- iPhone8,1 ipsw of iOS 15.7.1
 - [gaster](https://github.com/0x7ff/gaster)  
 - [libirecovery](https://github.com/libimobiledevice/libirecovery)  
 - [SSHRD_Script](https://github.com/verygenericname/SSHRD_Script)  
