@@ -3,7 +3,7 @@ WIP developer only iOS 15 jailbreak for checkm8 devices (Apple A8-A11)
 full rootfs r/w (fakefs), tweak injection etc...  
 
 ## Attention
-It's veey likely that there are mistakes in the code, it's recommended to debug in serial (because the device-side verbose boot is not able to follow SpringBoard's startup)
+It's very likely that there are mistakes in the code, so it's recommended to debug in serial (because the device-side verbose boot is not able to follow SpringBoard's startup).
 
 ## Supported Environment 
 - iPhone 6s (iPhone8,1/N71AP) 15.7.1  
