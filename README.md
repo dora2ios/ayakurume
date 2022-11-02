@@ -53,7 +53,13 @@ tar -xvf /mnt6/lightstrap.tar -C /mnt6/{UUID}/binpack/
 rm /mnt6/lightstrap.tar
 ```
 
-Using something like sshpass, copy`/mnt6/{UUID}/System/Library/Caches/apticket.der`(now used as`apticket.der) to the mac side.
+Copy apticket.der to the mac side.  
+
+- macos side  
+```
+scp -P 2222 root@localhost:/mnt6/{UUID}/System/Library/Caches/apticket.der ./  
+```
+
 
 
 - ios side
